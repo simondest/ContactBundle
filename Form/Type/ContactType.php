@@ -52,7 +52,7 @@ class ContactType extends AbstractType
      * @param string                   $class           The Contact class namespace
      * @param string                   $captchaType     The captcha type
      */
-    public function __construct(SubjectProviderInterface $subjectProvider, $class, $captchaType)
+    public function __construct(SubjectProviderInterface $subjectProvider, Contact $class, $captchaType=null)
     {
         $this->subjectProvider = $subjectProvider;
         $this->class           = $class;
