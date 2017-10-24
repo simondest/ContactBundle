@@ -40,6 +40,8 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('type')->defaultValue(ContactType::class)->cannotBeEmpty()->end()
+                        ->scalarNode('form_template')->defaultValue('MremiContactBundle:Contact:index.html.twig')->cannotBeEmpty()->end()
+                        ->scalarNode('confirm_template')->defaultValue('MremiContactBundle:Contact:confirm.html.twig')->cannotBeEmpty()->end()
                         ->scalarNode('name')->defaultValue('contact_form')->cannotBeEmpty()->end()
                         ->arrayNode('validation_groups')
                             ->prototype('scalar')->end()

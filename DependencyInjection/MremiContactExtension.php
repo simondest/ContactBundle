@@ -34,13 +34,15 @@ class MremiContactExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('controller.xml');
+        
         $loader->load('form.xml');
         $loader->load('listeners.xml');
-
+        $loader->load('controller.xml');
+        
         $this->configureContactManager($container, $config, $loader);
         $this->configureForm($container, $config);
         $this->configureMailer($container, $config, $loader);
+        $this->configureController($container,$config,$loader);
     }
 
     /**
@@ -126,5 +128,12 @@ class MremiContactExtension extends Extension
         $definition->replaceArgument(2, $config['email']['template']);
         $definition->replaceArgument(3, $to);
         $definition->replaceArgument(4, $from);
+    }
+    
+    private function configureController(ContainerBuilder $container, array $config, XmlFileLoader $loader)
+    {
+        $definition = $container->findDefinition('mremi_contact.contact_controller');
+        $definition->replaceArgument(6, $config['form']['form_template']);
+        $definition->replaceArgument(7, $config['form']['confirm_template']);     
     }
 }

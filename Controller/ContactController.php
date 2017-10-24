@@ -61,6 +61,10 @@ class ContactController
      * @var EngineInterface
      */
     private $templating;
+    
+    private $formTemplate;
+    
+    private $confirmTemplate;
 
     /**
      * Constructor.
@@ -72,7 +76,7 @@ class ContactController
      * @param SessionInterface         $session         A session instance
      * @param EngineInterface          $templating      A templating instance
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, FormFactory $formFactory, ContactManagerInterface $contactManager, RouterInterface $router, SessionInterface $session, EngineInterface $templating)
+    public function __construct(EventDispatcherInterface $eventDispatcher, FormFactory $formFactory, ContactManagerInterface $contactManager, RouterInterface $router, SessionInterface $session, EngineInterface $templating,$formTemplate=null,$confirmTemplate=null)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->formFactory     = $formFactory;
@@ -80,6 +84,8 @@ class ContactController
         $this->router          = $router;
         $this->session         = $session;
         $this->templating      = $templating;
+        $this->formTemplate = $formTemplate;
+        $this->confirmTemplate = $confirmTemplate;
     }
 
     /**
@@ -92,7 +98,6 @@ class ContactController
     public function indexAction(Request $request)
     {
         $contact = $this->contactManager->create();
-
         $this->eventDispatcher->dispatch(ContactEvents::FORM_INITIALIZE, new ContactEvent($contact, $request));
 
         $form = $this->formFactory->createForm($contact);
@@ -115,7 +120,7 @@ class ContactController
             return $response;
         }
 
-        return $this->templating->renderResponse('MremiContactBundle:Contact:index.html.twig', array(
+        return $this->templating->renderResponse($this->formTemplate, array(
             'form' => $form->createView(),
         ));
     }
@@ -135,7 +140,7 @@ class ContactController
             throw new AccessDeniedException('Please fill the contact form');
         }
 
-        return $this->templating->renderResponse('MremiContactBundle:Contact:confirm.html.twig', array(
+        return $this->templating->renderResponse($this->confirmTemplate, array(
             'contact' => $contact,
         ));
     }
