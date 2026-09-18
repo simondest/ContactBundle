@@ -2,3 +2,7 @@
 composer.lock
 phpunit.xml
 vendor
+.settings
+.buildpath
+.DS_Store
+.project
