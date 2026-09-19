@@ -12,7 +12,7 @@ This bundle is available under the [MIT license](Resources/meta/LICENSE).
 
 This version of the bundle requires Symfony 3.3+.
 
-### Translations
+### Traductions
 
 If you wish to use default texts provided in this bundle, you have to make
 sure you have translator enabled in your config.
