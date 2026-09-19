@@ -2,7 +2,7 @@ MremiContactBundle
 ==================
 
 [
-This bundle provides a contact form in Symfony3.
+formulaire de contact pour Symfony3.
 
 ## License
 
