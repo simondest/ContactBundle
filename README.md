@@ -44,7 +44,7 @@ Add MremiContactBundle in your composer.json:
 ```js
 {
     "require": {
-        "mremi/contact-bundle": "dev-master"
+        "mremi/contact-bundle": "dev-sf3"
     }
 }
 ```
